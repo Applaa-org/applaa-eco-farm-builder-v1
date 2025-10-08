@@ -68,7 +68,7 @@ function farmReducer(state: FarmState, action: FarmAction): FarmState {
             inventory: { ...state.inventory, [productKey]: (state.inventory[productKey] || 0) + Math.floor(harvestAmount) },
             plantedCrops: { ...state.plantedCrops, [action.cropId]: { ...planted, quantity: 0 } },
             sustainability: Math.min(100, state.sustainability + crop.sustainabilityScore / 10),
-            money: state.money + Math.floor(harvestAmount * state.marketPrices.find(p => p.cropId === action.cropId)?.basePrice || 0),
+            money: state.money + Math.floor(harvestAmount * (state.marketPrices.find(p => p.cropId === action.cropId)?.basePrice ?? 0)),
           };
         }
       }
